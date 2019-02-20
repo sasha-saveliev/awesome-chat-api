@@ -1,9 +1,9 @@
-import { Body, Controller, Post, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Headers, Post } from '@nestjs/common';
 
 import { User } from '../../common/entities/user.entity';
 import { CreateUserDto, UserCredentialsDto } from './dto';
+import { Token } from './interfaces';
 
-import { ExcludeUserPasswordInterceptor } from '../../common/interceptors';
 import { UserService } from '../../common/services/user.service';
 import { AuthService } from './services';
 
@@ -14,14 +14,18 @@ export class AuthController {
     private readonly userService: UserService
     ) {}
 
-  @UseInterceptors(new ExcludeUserPasswordInterceptor())
   @Post('sign-up')
   public createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.userService.createUser(createUserDto);
   }
 
   @Post('sign-in')
-  public authorize(@Body() userCredentialsDto: UserCredentialsDto) {
+  public authorize(@Body() userCredentialsDto: UserCredentialsDto): Promise<Token> {
     return this.authService.authorize(userCredentialsDto);
+  }
+
+  @Post('logout')
+  public logout(@Headers('token') token: string) {
+    return this.authService.logout(token);
   }
 }

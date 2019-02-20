@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { getRepository, Repository } from 'typeorm';
+import { FindConditions, FindOneOptions, getRepository, Repository } from 'typeorm';
 
 import { CreateUserDto } from '../../modules/auth/dto';
 import { User } from '../entities/user.entity';
@@ -27,7 +27,7 @@ export class UserRepository {
       .getOne();
   }
 
-  public findOne(options: object): Promise<User> {
-    return this.repository.findOne(options);
+  public findOne(conditions: FindConditions<User>, options?: FindOneOptions): Promise<User> {
+    return this.repository.findOne(conditions, options);
   }
 }

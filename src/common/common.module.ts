@@ -1,18 +1,22 @@
 import { Module } from '@nestjs/common';
 
-import { UserRepository } from './repositories';
+import { TokenBlacklistRepository, UserRepository } from './repositories';
 import { PasswordHashService, UserService } from './services';
 
 @Module({
   providers: [
     PasswordHashService,
     UserService,
-    UserRepository
+
+    UserRepository,
+    TokenBlacklistRepository
   ],
   exports: [
     PasswordHashService,
     UserService,
-    UserRepository
+
+    UserRepository,
+    TokenBlacklistRepository
   ]
 })
 export class CommonModule {}

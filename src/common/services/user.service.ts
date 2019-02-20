@@ -1,4 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
+import { isEmpty } from '@nestjs/common/utils/shared.utils';
+import { FindConditions } from 'typeorm';
 
 import { CreateUserDto } from '../../modules/auth/dto';
 import { User } from '../entities/user.entity';
@@ -27,7 +29,9 @@ export class UserService {
     return this.userRepository.createAndSave(createUserDto);
   }
 
-  public findUser(options: object): Promise<User> {
-    return this.userRepository.findOne(options);
+  public findUser(conditions: FindConditions<User>, fieldsToBeSelected: string[] = []): Promise<User> {
+    const options = isEmpty(fieldsToBeSelected) ? {} : { select: fieldsToBeSelected };
+
+    return this.userRepository.findOne(conditions, options);
   }
 }
