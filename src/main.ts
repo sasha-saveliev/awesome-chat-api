@@ -12,7 +12,9 @@ async function bootstrap() {
   createConnection()
     .then(async () => {
       const app: INestApplication & INestExpressApplication = await NestFactory.create(AppModule);
+
       app.useGlobalPipes(new ValidationPipe());
+      app.enableCors();
 
       const server: INestApplication & INestExpressApplication = await app.listen(APP_PORT);
       const socketService: SocketService = app.get(SocketService);
