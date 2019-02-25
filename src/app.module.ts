@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
 
-import { AuthModule } from './modules/auth/auth.module';
-import { SocketModule } from './socket/socket.module';
-
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
   imports: [
     AuthModule,
-    SocketModule
+    SocketModule,
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],

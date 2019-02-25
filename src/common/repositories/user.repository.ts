@@ -30,4 +30,8 @@ export class UserRepository {
   public findOne(conditions: FindConditions<User>, options?: FindOneOptions): Promise<User> {
     return this.repository.findOne(conditions, options);
   }
+
+  public findAll(): Promise<User[]> {
+    return this.repository.find();
+  }
 }
