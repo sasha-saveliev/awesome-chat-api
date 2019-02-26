@@ -34,4 +34,8 @@ export class UserRepository {
   public findAll(): Promise<User[]> {
     return this.repository.find();
   }
+
+  public findByIds(ids: number[]): Promise<User[]> {
+    return this.repository.findByIds(ids);
+  }
 }

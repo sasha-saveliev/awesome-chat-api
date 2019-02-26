@@ -38,4 +38,8 @@ export class UserService {
   public findAll(): Promise<User[]> {
     return this.userRepository.findAll();
   }
+
+  public findByIds(ids: number[]): Promise<User[]> {
+    return this.userRepository.findByIds(ids);
+  }
 }

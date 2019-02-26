@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
 
-import { UsersGateway } from './gateways';
+import { CommonModule } from '../common/common.module';
+import { RoomsGateway, UsersGateway } from './gateways';
 
 @Module({
   providers: [
     UsersGateway,
+    RoomsGateway
+  ],
+  imports: [
+    CommonModule
   ],
   exports: []
 })
