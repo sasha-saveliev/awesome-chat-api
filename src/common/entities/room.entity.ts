@@ -7,6 +7,6 @@ export class Room {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @ManyToMany(type => User)
+  @ManyToMany(type => User, user => user.rooms)
   public participants: User[];
 }

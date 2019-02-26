@@ -8,7 +8,14 @@ import { User } from '../entities/user.entity';
 export class RoomRepository {
   private readonly repository: Repository<Room> = getRepository(Room);
 
-  public async createAndSave(participants: User[]): Promise<Room> {
+  public createAndSave(participants: User[]): Promise<Room> {
     return this.repository.save({ participants });
+  }
+
+  public async findByUserId(id: number) {
+    // TODO: Refactor to join-query
+    const allRooms: Room[] = await this.repository.find({ relations: ['participants']});
+
+    return allRooms.filter(room => room.participants.some(participant => participant.id === id))
   }
 }

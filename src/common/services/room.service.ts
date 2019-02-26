@@ -10,7 +10,11 @@ export class RoomService {
     private readonly roomRepository: RoomRepository
   ) {}
 
-  public async createAndSave(participants: User[]): Promise<Room> {
+  public createAndSave(participants: User[]): Promise<Room> {
     return this.roomRepository.createAndSave(participants);
+  }
+
+  public findRoomsByUserId(id: number): Promise<Room[]> {
+    return this.roomRepository.findByUserId(id);
   }
 }

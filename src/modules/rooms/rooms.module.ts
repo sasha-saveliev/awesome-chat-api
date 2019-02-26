@@ -3,7 +3,7 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { CommonModule } from '../../common/common.module';
 import { AuthMiddleware } from '../auth/auth.middleware';
 import { AuthModule } from '../auth/auth.module';
-import { UsersController } from './users.controller';
+import { RoomsController } from './rooms.controller';
 
 @Module({
   imports: [
@@ -11,14 +11,14 @@ import { UsersController } from './users.controller';
     AuthModule
   ],
   controllers: [
-    UsersController
+    RoomsController
   ]
 })
-export class UsersModule {
+export class RoomsModule {
   public configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .with('UsersModule')
-      .forRoutes(UsersController);
+      .with('RoomsModule')
+      .forRoutes(RoomsController);
   }
 }
