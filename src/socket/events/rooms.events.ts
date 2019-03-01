@@ -1,3 +1,3 @@
-export enum RoomsActions {
+export enum RoomsEvents {
   CreateRoom = '[Rooms] Create room'
 }

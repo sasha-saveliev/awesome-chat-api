@@ -12,10 +12,14 @@ export class RoomRepository {
     return this.repository.save({ participants });
   }
 
-  public async findByUserId(id: number) {
+  public async findByUserId(id: number): Promise<Room[]> {
     // TODO: Refactor to join-query
-    const allRooms: Room[] = await this.repository.find({ relations: ['participants']});
+    const allRooms: Room[] = await this.repository.find({ relations: ['participants', 'messages']});
 
-    return allRooms.filter(room => room.participants.some(participant => participant.id === id))
+    return allRooms.filter(room => room.participants.some(participant => participant.id === id));
+  }
+
+  public findById(id: number): Promise<Room> {
+    return this.repository.findOne(id);
   }
 }

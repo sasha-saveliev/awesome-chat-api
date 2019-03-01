@@ -17,4 +17,8 @@ export class RoomService {
   public findRoomsByUserId(id: number): Promise<Room[]> {
     return this.roomRepository.findByUserId(id);
   }
+
+  public findById(id: number): Promise<Room> {
+    return this.roomRepository.findById(id);
+  }
 }
