@@ -23,7 +23,7 @@ export class MessagesGateway {
     const room = await this.roomService.findById(createMessageDto.roomId);
     const savedMessage = await this.messageService.createAndSave(createMessageDto, room);
 
-    this.server
+    client.broadcast
       .to(createMessageDto.roomId.toString())
       .emit(MessagesEvents.NewMessage, savedMessage);
 

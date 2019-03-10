@@ -10,8 +10,8 @@ export class UsersController {
   ) {}
 
   @Get()
-  public findAll(): Promise<User[]> {
-    return this.userService.findAll();
+  public findAll(@Req() req): Promise<User[]> {
+    return this.userService.findAll(req.user);
   }
 
   @Get('current')

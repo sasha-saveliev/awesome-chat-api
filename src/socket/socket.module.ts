@@ -2,11 +2,13 @@ import { Module } from '@nestjs/common';
 
 import { CommonModule } from '../common/common.module';
 import { AuthModule } from '../modules/auth/auth.module';
-import { RoomsGateway, UsersGateway } from './gateways';
-import { MessagesGateway } from './gateways/messages.gateway';
+import { ConnectionGateway, MessagesGateway, RoomsGateway, UsersGateway } from './gateways';
+import { ConnectionService } from './services';
 
 @Module({
   providers: [
+    ConnectionService,
+    ConnectionGateway,
     UsersGateway,
     RoomsGateway,
     MessagesGateway

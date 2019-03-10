@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FindConditions, FindOneOptions, getRepository, Repository } from 'typeorm';
+import { FindConditions, FindOneOptions, getRepository, Not, Repository } from 'typeorm';
 
 import { CreateUserDto } from '../../modules/auth/dto';
 import { User } from '../entities/user.entity';
@@ -31,8 +31,10 @@ export class UserRepository {
     return this.repository.findOne(conditions, options);
   }
 
-  public findAll(): Promise<User[]> {
-    return this.repository.find();
+  public findAll(currentUserId: number): Promise<User[]> {
+    return this.repository.find({
+      id: Not(currentUserId)
+    });
   }
 
   public findByIds(ids: number[]): Promise<User[]> {

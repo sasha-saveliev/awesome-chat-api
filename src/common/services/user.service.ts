@@ -35,8 +35,8 @@ export class UserService {
     return this.userRepository.findOne(conditions, options);
   }
 
-  public findAll(): Promise<User[]> {
-    return this.userRepository.findAll();
+  public findAll(currentUser: User): Promise<User[]> {
+    return this.userRepository.findAll(currentUser.id);
   }
 
   public findByIds(ids: number[]): Promise<User[]> {
