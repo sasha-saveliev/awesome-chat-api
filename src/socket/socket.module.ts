@@ -17,6 +17,8 @@ import { ConnectionService } from './services';
     CommonModule,
     AuthModule
   ],
-  exports: []
+  exports: [
+    ConnectionService
+  ]
 })
 export class SocketModule {}
