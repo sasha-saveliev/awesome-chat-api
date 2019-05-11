@@ -5,7 +5,7 @@ import {
   WebSocketServer
 } from '@nestjs/websockets';
 
-import { CreateMessageDto } from '../../common/dto';
+import { CreateMessageDto, TypingMessageDto } from '../../common/dto';
 import { MessageService, RoomService } from '../../common/services';
 import { MessagesEvents } from '../events';
 
@@ -19,7 +19,7 @@ export class MessagesGateway {
   ) {}
 
   @SubscribeMessage(MessagesEvents.CreateMessage)
-  public async onEvent(client: SocketIO.Socket, createMessageDto: CreateMessageDto) {
+  public async onCreateMessage(client: SocketIO.Socket, createMessageDto: CreateMessageDto) {
     const room = await this.roomService.findById(createMessageDto.roomId);
     const savedMessage = await this.messageService.createAndSave(createMessageDto, room);
 
@@ -28,5 +28,19 @@ export class MessagesGateway {
       .emit(MessagesEvents.NewMessage, savedMessage);
 
     return savedMessage;
+  }
+
+  @SubscribeMessage(MessagesEvents.TypingMessage)
+  public async onTypingMessage(client: SocketIO.Socket, typingMessageDto: TypingMessageDto) {
+    client.broadcast
+      .to(typingMessageDto.roomId.toString())
+      .emit(MessagesEvents.TypingMessage, typingMessageDto);
+  }
+
+  @SubscribeMessage(MessagesEvents.StopTypingMessage)
+  public async onStopTypingMessage(client: SocketIO.Socket, typingMessageDto: TypingMessageDto) {
+    client.broadcast
+      .to(typingMessageDto.roomId.toString())
+      .emit(MessagesEvents.StopTypingMessage, typingMessageDto);
   }
 }
