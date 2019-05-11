@@ -1,15 +1,26 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 
 import { User } from '../../common/entities/user.entity';
 import { UserService } from '../../common/services';
-import { ConnectionService } from '../../socket/services';
+import { ConnectionService, UserSocketService } from '../../socket/services';
+import { CreateUserDto } from '../auth/dto';
 
 @Controller('users')
 export class UsersController {
   constructor(
     public readonly userService: UserService,
+    public readonly userSocketService: UserSocketService,
     public readonly connectionService: ConnectionService
   ) {}
+
+  @Post()
+  public async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+    const createdUser = await this.userService.createUser(createUserDto);
+
+    this.userSocketService.notifyAboutNewUser(createdUser);
+
+    return createdUser;
+  }
 
   @Get()
   public findAll(@Req() req): Promise<User[]> {

@@ -8,8 +8,12 @@ import { User } from '../entities/user.entity';
 export class RoomRepository {
   private readonly repository: Repository<Room> = getRepository(Room);
 
-  public createAndSave(participants: User[]): Promise<Room> {
-    return this.repository.save({ participants });
+  public async createAndSave(participants: User[]): Promise<Room> {
+    const room = await this.repository.save({ participants });
+
+    room.messages = [];
+
+    return room;
   }
 
   public async findByUserId(id: number): Promise<Room[]> {
