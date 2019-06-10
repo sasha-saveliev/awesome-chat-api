@@ -1,6 +1,12 @@
 import { Module } from '@nestjs/common';
 
-import { MessageRepository, RoomRepository, TokenBlacklistRepository, UserRepository } from './repositories';
+import {
+  MessageRepository,
+  MessageViewRepository,
+  RoomRepository,
+  TokenBlacklistRepository,
+  UserRepository
+} from './repositories';
 import { MessageService, PasswordHashService, UserService } from './services';
 import { RoomService } from './services/room.service';
 
@@ -14,7 +20,8 @@ import { RoomService } from './services/room.service';
     UserRepository,
     TokenBlacklistRepository,
     RoomRepository,
-    MessageRepository
+    MessageRepository,
+    MessageViewRepository
   ],
   exports: [
     PasswordHashService,

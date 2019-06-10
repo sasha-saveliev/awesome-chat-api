@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+import { MessageView } from './message-view.entity';
 import { Room } from './room.entity';
 
 @Entity()
@@ -11,7 +12,10 @@ export class Message {
   public authorId: number;
 
   @Column({ type: 'bigint' })
-  public timestamp: number;
+  public createdAt: number;
+
+  @OneToMany(type => MessageView, messageView => messageView.message)
+  public views: MessageView | [];
 
   @Column()
   public text: string;

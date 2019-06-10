@@ -18,7 +18,7 @@ export class RoomRepository {
 
   public async findByUserId(id: number): Promise<Room[]> {
     // TODO: Refactor to join-query
-    const allRooms: Room[] = await this.repository.find({ relations: ['participants', 'messages']});
+    const allRooms: Room[] = await this.repository.find({ relations: ['participants', 'messages', 'messages.views']});
 
     return allRooms.filter(room => room.participants.some(participant => participant.id === id));
   }

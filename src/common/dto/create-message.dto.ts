@@ -1,6 +1,6 @@
 export class CreateMessageDto {
   public authorId: number;
-  public timestamp: number;
+  public createdAt: number;
   public text: string;
   public roomId: number;
 }
