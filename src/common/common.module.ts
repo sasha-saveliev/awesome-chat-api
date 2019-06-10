@@ -8,6 +8,7 @@ import {
   UserRepository
 } from './repositories';
 import { MessageService, PasswordHashService, UserService } from './services';
+import { AvatarService } from './services/avatar.service';
 import { RoomService } from './services/room.service';
 
 @Module({
@@ -16,6 +17,7 @@ import { RoomService } from './services/room.service';
     UserService,
     RoomService,
     MessageService,
+    AvatarService,
 
     UserRepository,
     TokenBlacklistRepository,
@@ -28,6 +30,7 @@ import { RoomService } from './services/room.service';
     UserService,
     RoomService,
     MessageService,
+    AvatarService,
 
     UserRepository,
     TokenBlacklistRepository,

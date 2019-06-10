@@ -39,6 +39,13 @@ export class User {
   })
   public password: string;
 
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: true
+  })
+  public avatarUrl: string;
+
   @ManyToMany(type => Room, room => room.participants)
   @JoinTable()
   public rooms: Room[];

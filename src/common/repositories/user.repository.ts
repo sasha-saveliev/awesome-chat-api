@@ -16,6 +16,7 @@ export class UserRepository {
     user.email = createUserDto.email;
     user.username = createUserDto.username;
     user.password = createUserDto.password;
+    user.avatarUrl = createUserDto.avatarUrl;
 
     return this.repository.save(user);
   }

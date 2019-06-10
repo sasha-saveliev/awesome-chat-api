@@ -5,13 +5,15 @@ import { FindConditions } from 'typeorm';
 import { CreateUserDto } from '../../modules/auth/dto';
 import { User } from '../entities/user.entity';
 import { UserRepository } from '../repositories/user.repository';
+import { AvatarService } from './avatar.service';
 import { PasswordHashService } from './password-hash.service';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly passwordHashService: PasswordHashService
+    private readonly passwordHashService: PasswordHashService,
+    private readonly avatarService: AvatarService
   ) {}
 
   public async createUser(createUserDto: CreateUserDto): Promise<User> {
@@ -23,6 +25,7 @@ export class UserService {
       throw new ConflictException(`${conflictSubject} is already in use`);
     }
 
+    createUserDto.avatarUrl = this.avatarService.getRandomAvatar();
     createUserDto.password = await this.passwordHashService.hash(createUserDto.password);
     createUserDto.email = createUserDto.email.toLowerCase();
 

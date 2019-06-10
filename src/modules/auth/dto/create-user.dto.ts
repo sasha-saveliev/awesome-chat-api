@@ -17,4 +17,6 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   public password: string;
+
+  public avatarUrl?: string;
 }
