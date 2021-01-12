@@ -2,8 +2,6 @@
 version: 0.2
 
 env:
-  variables:
-    author: git log -1 --pretty=%ae
   exported-variables:
     author
 phases:
@@ -13,7 +11,7 @@ phases:
     commands:
       - echo Installing Mocha...
       - echo Printing author...
-      - export testName=$(git log -1 --pretty=%ae)
+      - set author=git log -1 --pretty=%ae
       - echo $(git log -1 --pretty=%ae)
       - exit 1
   pre_build:
