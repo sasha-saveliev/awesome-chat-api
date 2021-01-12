@@ -2,8 +2,10 @@
 version: 0.2
 
 env:
+  variables:
+    test: 33
   exported-variables:
-    test: "test_value"
+    test
 phases:
   install:
     runtime-versions:
