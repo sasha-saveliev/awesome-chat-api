@@ -4,7 +4,6 @@ version: 0.2
 env:
   exported-variables:
     test: "test_value"
-  git-credential-helper: yes
 phases:
   install:
     runtime-versions:
