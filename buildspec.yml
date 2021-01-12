@@ -3,9 +3,9 @@ version: 0.2
 
 env:
   variables:
-    test: 33
+    author: $(git log -1 --pretty=%ae)
   exported-variables:
-    test
+    author
 phases:
   install:
     runtime-versions:
