@@ -11,7 +11,7 @@ phases:
     commands:
       - echo Installing Mocha...
       - echo Printing author...
-      - set author=git log -1 --pretty=%ae
+      - set author=$(git log -1 --pretty=%ae)
       - echo $(git log -1 --pretty=%ae)
       - exit 1
   pre_build:
