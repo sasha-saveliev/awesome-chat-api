@@ -3,7 +3,7 @@ version: 0.2
 
 env:
   variables:
-    author: $(git log -1 --pretty=%ae)
+    author: git log -1 --pretty=%ae
   exported-variables:
     author
 phases:
